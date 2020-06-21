@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use App\Service\GitHubService;
 use App\Service\BitbuckedService;
 
-class CreateUserCommand extends Command
+class GitLastCommitCommand extends Command
 {
     protected static $defaultName = 'app:get-last-commit';
 
