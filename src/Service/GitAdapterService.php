@@ -16,4 +16,15 @@ abstract class GitAdapterService
     {
         $this->branch = $branch;
     }
+
+    protected function clearResult(string $string): string
+    {
+        return str_replace("	refs/heads/master", "", $string);
+    }
+
+    public function execute(): string
+    {
+        $result = exec("git ls-remote " . $this->apiUri . $this->repository . " refs/heads/" . $this->branch);
+        return $this->clearResult($result);
+    }
 }
