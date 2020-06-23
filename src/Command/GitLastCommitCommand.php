@@ -12,6 +12,8 @@ use App\Service\BitbuckedService;
 class GitLastCommitCommand extends Command
 {
     protected static $defaultName = 'app:get-last-commit';
+    private $gitHubService;
+    private $bitbuckedService;
 
     public function __construct(GitHubService $gitHubService, BitbuckedService $bitbuckedService)
     {
