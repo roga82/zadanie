@@ -32,7 +32,7 @@ class GitLastCommitCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if ($input->getArgument('git-service') === "bitbucked") {
+        if ($input->getArgument('git-service') === "bitbucket") {
             $service = $this->bitbuckedService;
         } else {
             $service = $this->gitHubService;
