@@ -13,7 +13,8 @@ class GitLastCommitCommand extends Command
 {
     protected static $defaultName = 'app:get-last-commit';
 
-    public function __construct(GitHubService $gitHubService, BitbuckedService $bitbuckedService) {
+    public function __construct(GitHubService $gitHubService, BitbuckedService $bitbuckedService)
+    {
         parent::__construct();
 
         $this->gitHubService = $gitHubService;
@@ -31,17 +32,15 @@ class GitLastCommitCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if  ($input->getArgument('git-service') === "bitbucked") {
-            $bitbuckedService = $this->bitbuckedService;
-            $bitbuckedService->setRepository($input->getArgument('repository'));
-            $bitbuckedService->setBranch($input->getArgument('branch'));
-            echo $bitbuckedService->execute();
+        if ($input->getArgument('git-service') === "bitbucked") {
+            $service = $this->bitbuckedService;
         } else {
-            $gitHubService = $this->gitHubService;
-            $gitHubService->setRepository($input->getArgument('repository'));
-            $gitHubService->setBranch($input->getArgument('branch'));
-            echo $gitHubService->execute();
+            $service = $this->gitHubService;
         }
+
+        $service->setRepository($input->getArgument('repository'));
+        $service->setBranch($input->getArgument('branch'));
+        $output->writeln($service->execute());
 
         return Command::SUCCESS;
     }
