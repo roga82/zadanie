@@ -25,6 +25,10 @@ abstract class GitAdapterService
     public function execute(): string
     {
         $result = exec("git ls-remote " . $this->apiUri . $this->repository . " refs/heads/" . $this->branch);
-        return $this->clearResult($result);
+        if ($result) {
+            return $this->clearResult($result);
+        } else {
+            return "branch doesn't exist";
+        }
     }
 }
